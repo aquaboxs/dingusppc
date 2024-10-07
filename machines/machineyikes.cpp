@@ -55,7 +55,7 @@ int initialize_yikes(std::string& id)
 
     // attach PCI devices to the PCI bridges
     grackle_obj->pci_register_device(DEV_FUN(0x10,0),
-        dynamic_cast<PCIBase*>(gMachineObj->get_comp_by_name("AtiRage128GL")));
+        dynamic_cast<PCIBase*>(gMachineObj->get_comp_by_name("AtiMach64Gx")));
 
     grackle_obj->pci_register_device(DEV_FUN(0x0D,0),
         dynamic_cast<PCIBase*>(gMachineObj->get_comp_by_name("Dec21154")));
@@ -75,8 +75,15 @@ int initialize_yikes(std::string& id)
     setup_ram_slot("RAM_DIMM_3", 0x52, GET_INT_PROP("rambank3_size"));
     setup_ram_slot("RAM_DIMM_4", 0x53, GET_INT_PROP("rambank4_size"));
 
+    // configure CPU clocks
+    uint64_t bus_freq      = 66820000ULL;
+    uint64_t timebase_freq = bus_freq / 4;
+
     // initialize virtual CPU
-    ppc_cpu_init(grackle_obj, PPC_VER::MPC7400, false, 400000000);
+    ppc_cpu_init(grackle_obj, PPC_VER::MPC7400, false, timebase_freq);
+
+    // set CPU PLL ratio to 3.5
+    ppc_state.spr[SPR::HID1] = 0xE << 28;
 
     return 0;
 }
@@ -99,7 +106,7 @@ static const PropMap yikes_settings = {
 };
 
 static vector<string> yikes_devices = {
-    "Grackle", "Dec21154", "BurgundySnd", "Heathrow", "AtiRage128GL", "AtaHardDisk", "AtapiCdrom"
+    "Grackle", "Dec21154", "BurgundySnd", "Heathrow", "AtiMach64Gx", "AtaHardDisk", "AtapiCdrom"
 };
 
 static const MachineDescription yikes_descriptor = {
