@@ -110,7 +110,6 @@ private:
     uint32_t aperture_size[3] = {0x4000000, 0x100, 0x4000};
     uint32_t aperture_flag[3] = {0, 1, 0};
 
-    uint32_t aperture_base  = 0;
     uint32_t io_base        = 0;
     uint8_t user_cfg        = 8;
 
