@@ -106,6 +106,7 @@ private:
     uint32_t vram_size;
 
     uint32_t aperture_count   = 3;
+    uint32_t aperture_base[3] = { 0, 0, 0 };
     uint32_t aperture_size[3] = {0x4000000, 0x100, 0x4000};
     uint32_t aperture_flag[3] = {0, 1, 0};
 
