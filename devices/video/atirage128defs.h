@@ -163,8 +163,10 @@ enum {
     ATI_CRTC_GUI_TRIG_VLINE      = 0x086,    // 0x0218
     ATI_CRTC_DEBUG               = 0x087,    // 0x021C
     ATI_CRTC_OFFSET              = 0x089,    // 0x0224
+        ATI_CRTC_OFFSET_size = 20,
     ATI_CRTC_OFFSET_CNTL         = 0x08A,    // 0x0228
     ATI_CRTC_PITCH               = 0x08B,    // 0x022C
+        ATI_CRTC_PITCH_size = 10,
     ATI_OVR_CLR                  = 0x08C,    // 0x0230
     ATI_OVR_WID_LEFT_RIGHT       = 0x08D,    // 0x0234
     ATI_OVR_WID_TOP_BOTTOM       = 0x08E,    // 0x0238

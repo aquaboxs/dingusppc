@@ -579,13 +579,13 @@ void ATIRage128::crtc_update() {
 
     static uint8_t bits_per_pixel[8] = {0, 4, 8, 16, 16, 24, 32, 0};
 
-    int new_fb_pitch = extract_bits<uint32_t>(this->regs[ATI_CRTC_OFF_PITCH],
+    int new_fb_pitch = extract_bits<uint32_t>(this->regs[ATI_CRTC_OFFSET_CNTL],
         ATI_CRTC_PITCH, ATI_CRTC_PITCH_size) * bits_per_pixel[this->pixel_format];
     if (new_fb_pitch != this->fb_pitch) {
         this->fb_pitch = new_fb_pitch;
         need_recalc = true;
     }
-    uint8_t* new_fb_ptr = &this->vram_ptr[extract_bits<uint32_t>(this->regs[ATI_CRTC_OFF_PITCH],
+    uint8_t* new_fb_ptr = &this->vram_ptr[extract_bits<uint32_t>(this->regs[ATI_CRTC_OFFSET_CNTL],
         ATI_CRTC_OFFSET, ATI_CRTC_OFFSET_size) * 8];
     if (new_fb_ptr != this->fb_ptr) {
         this->fb_ptr = new_fb_ptr;
