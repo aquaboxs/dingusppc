@@ -22,6 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 /** @file Construct the Yikes machine (Power Macintosh G4). */
 
 #include <cpu/ppc/ppcemu.h>
+#include <devices/common/pci/dec21154.h>
 #include <devices/memctrl/mpc106.h>
 #include <devices/memctrl/spdram.h>
 #include <devices/ioctrl/macio.h>
