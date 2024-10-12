@@ -59,6 +59,10 @@ int initialize_yosemite(std::string& id)
     grackle_obj->pci_register_device(DEV_FUN(13,0),
         dynamic_cast<PCIBase*>(gMachineObj->get_comp_by_name("Dec21154")));
 
+    // register CMD646U2 PCI Ultra ATA Controller
+    sec_bridge->pci_register_device(DEV_FUN(1,0),
+        dynamic_cast<PCIDevice*>(gMachineObj->get_comp_by_name("CmdAta")));
+
     sec_bridge->pci_register_device(DEV_FUN(5,0),
         dynamic_cast<PCIDevice*>(gMachineObj->get_comp_by_name("Heathrow")));
 
@@ -121,12 +125,15 @@ static const PropMap yosemite_settings = {
         new IntProperty(  0, vector<uint32_t>({0, 8, 16, 32, 64, 128, 256}))},
     {"emmo",
         new BinProperty(0)},
+    {"hdd_config",
+        new StrProperty("CmdAta0:0")},
     {"cdr_config",
         new StrProperty("Ide0:0")},
 };
 
 static vector<string> yosemite_devices = {
-    "Grackle", "Dec21154", "BurgundySnd", "Heathrow", "AtapiCdrom"
+    "Grackle", "Dec21154", "CmdAta", "BurgundySnd", "Heathrow", "AtaHardDisk",
+    "AtapiCdrom"
 };
 
 static const MachineDescription yosemite_descriptor = {
