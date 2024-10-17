@@ -222,7 +222,7 @@ void dppc_interpreter::ppc_fdiv() {
     ppc_store_dfpresult_flt(reg_d, ppc_dblresult64_d);
     fpresult_update(ppc_dblresult64_d);
 
-    if (isinf(val_reg_a) && isinf(val_reg_b))
+    if (std::isinf(val_reg_a) && std::isinf(val_reg_b))
         ppc_state.fpscr |= VXIDI;
 
     if ((val_reg_a == 0.0) && (val_reg_b == 0.0))
@@ -245,7 +245,7 @@ void dppc_interpreter::ppc_fmul() {
     ppc_store_dfpresult_flt(reg_d, ppc_dblresult64_d);
     fpresult_update(ppc_dblresult64_d);
 
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     if (rec)
@@ -270,7 +270,7 @@ void dppc_interpreter::ppc_fmadd() {
     if (((val_reg_a == inf) && (val_reg_b == -inf)) || ((val_reg_a == -inf) && (val_reg_b == inf)))
         ppc_state.fpscr |= VXISI;
 
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     if (rec)
@@ -291,7 +291,7 @@ void dppc_interpreter::ppc_fmsub() {
     ppc_store_dfpresult_flt(reg_d, ppc_dblresult64_d);
     fpresult_update(ppc_dblresult64_d);
 
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     double inf = std::numeric_limits<double>::infinity();
@@ -313,7 +313,7 @@ void dppc_interpreter::ppc_fnmadd() {
     snan_single_check(reg_b);
 
     double ppc_dblresult64_d = -std::fma(val_reg_a, val_reg_c, val_reg_b);
-    if (isnan(ppc_dblresult64_d)) {
+    if (std::isnan(ppc_dblresult64_d)) {
         ppc_dblresult64_d = -ppc_dblresult64_d;
     }
     ppc_store_dfpresult_flt(reg_d, ppc_dblresult64_d);
@@ -323,7 +323,7 @@ void dppc_interpreter::ppc_fnmadd() {
     if (((val_reg_a == inf) && (val_reg_b == -inf)) || ((val_reg_a == -inf) && (val_reg_b == inf)))
         ppc_state.fpscr |= VXISI;
 
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     if (rec)
@@ -344,7 +344,7 @@ void dppc_interpreter::ppc_fnmsub() {
     ppc_store_dfpresult_flt(reg_d, ppc_dblresult64_d);
     fpresult_update(ppc_dblresult64_d);
 
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     double inf = std::numeric_limits<double>::infinity();
@@ -410,7 +410,7 @@ void dppc_interpreter::ppc_fdivs() {
 
     double ppc_dblresult64_d = (float)(val_reg_a / val_reg_b);
 
-    if (isinf(val_reg_a) && isinf(val_reg_b))
+    if (std::isinf(val_reg_a) && std::isinf(val_reg_b))
         ppc_state.fpscr |= VXIDI;
 
     if ((val_reg_a == 0.0) && (val_reg_b == 0.0))
@@ -434,7 +434,7 @@ void dppc_interpreter::ppc_fmuls() {
 
     double ppc_dblresult64_d = (float)(val_reg_a * val_reg_c);
 
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     ppc_store_sfpresult_flt(reg_d, ppc_dblresult64_d);
@@ -463,7 +463,7 @@ void dppc_interpreter::ppc_fmadds() {
     if (((val_reg_a == inf) && (val_reg_b == -inf)) || ((val_reg_a == -inf) && (val_reg_b == inf)))
         ppc_state.fpscr |= VXISI;
 
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     if (rec)
@@ -482,13 +482,13 @@ void dppc_interpreter::ppc_fmsubs() {
 
 
     double ppc_dblresult64_d = (float)std::fma(val_reg_a, val_reg_c, -val_reg_b);
-    if (isnan(ppc_dblresult64_d)) {
+    if (std::isnan(ppc_dblresult64_d)) {
         ppc_dblresult64_d = -ppc_dblresult64_d;
     }
     ppc_store_sfpresult_flt(reg_d, ppc_dblresult64_d);
     fpresult_update(ppc_dblresult64_d);
     
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     double inf = std::numeric_limits<double>::infinity();
@@ -510,7 +510,7 @@ void dppc_interpreter::ppc_fnmadds() {
     snan_single_check(reg_b);
 
     double ppc_dblresult64_d = -(float)std::fma(val_reg_a, val_reg_c, val_reg_b);
-    if (isnan(ppc_dblresult64_d)) {
+    if (std::isnan(ppc_dblresult64_d)) {
         ppc_dblresult64_d = -ppc_dblresult64_d;
     }
     ppc_store_sfpresult_flt(reg_d, ppc_dblresult64_d);
@@ -520,7 +520,7 @@ void dppc_interpreter::ppc_fnmadds() {
     if (((val_reg_a == inf) && (val_reg_b == -inf)) || ((val_reg_a == -inf) && (val_reg_b == inf)))
         ppc_state.fpscr |= VXISI;
 
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     if (rec)
@@ -541,7 +541,7 @@ void dppc_interpreter::ppc_fnmsubs() {
     ppc_store_sfpresult_flt(reg_d, ppc_dblresult64_d);
     fpresult_update(ppc_dblresult64_d);
 
-    if ((isinf(val_reg_a) && (val_reg_c == 0.0)) || (isinf(val_reg_c) && (val_reg_a == 0.0)))
+    if ((std::isinf(val_reg_a) && (val_reg_c == 0.0)) || (std::isinf(val_reg_c) && (val_reg_a == 0.0)))
         ppc_state.fpscr |= VXIMZ;
 
     double inf = std::numeric_limits<double>::infinity();
